@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import'./SearchResults.css';
 import TrackList from '../TrackList/TrackList';
 
@@ -15,4 +16,8 @@ class SearchResults extends React.Component {
     }
 }
 
+SearchResults.propTypes = {
+    searchResults: PropTypes.array.isRequired,
+    onAdd: PropTypes.func,
+}
 export default SearchResults;

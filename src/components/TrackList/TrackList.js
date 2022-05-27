@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './TrackList.css';
 import Track from '../Track/Track';
 
 class TrackList extends React.Component{
     render() {
-        console.log(this.props.playlistTracks);
         return (
             <div className="TrackList">
                 {
@@ -20,6 +20,13 @@ class TrackList extends React.Component{
             </div>
         )
     }
+}
+
+TrackList.propTypes = {
+    tracks: PropTypes.array.isRequired,
+    onAdd: PropTypes.func,
+    onRemove: PropTypes.func,
+    isRemoval: PropTypes.bool
 }
 
 export default TrackList;
