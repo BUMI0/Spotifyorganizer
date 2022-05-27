@@ -44,6 +44,11 @@ h2 {
   width: 100%;
 }
 
+/* removes the ugly white line at the bottom*/
+.MainContent {
+  height: 100%;
+}
+
 @media only screen and (max-width: 1020px) {
   .App-playlist {
     align-items: center;
