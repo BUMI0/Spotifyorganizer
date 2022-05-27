@@ -1,5 +1,5 @@
 const clientId = '6698407c6b244c96b9c5d13a829d0ebd';
-const redirectUri = 'http://localhost:3000';
+const redirectUri = 'http://localhost:3000'; // TODO: dynamisch erstellen: also: window.location.host oder so
 let accessToken;
 
 const Spotify = {
@@ -26,7 +26,7 @@ const Spotify = {
         }
     },
 
-    search(term){
+    async search(term){
         const accessToken = Spotify.getAccessToken();
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,
         {headers: {
