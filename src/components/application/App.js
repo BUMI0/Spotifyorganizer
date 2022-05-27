@@ -64,6 +64,7 @@ class App extends React.Component {
       <div className="App">
         <SearchBar onSearch={this.search}/>
         <div className="App-playlist">
+          //state von searchResults an Komponent SearchResults 
           <SearchResults searchResults={this.state.searchResults}
                         onAdd={this.addTrack}/>
           <Playlist playlistName={this.state.playlistName}
