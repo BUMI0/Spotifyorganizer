@@ -1,5 +1,6 @@
 const clientId = '6698407c6b244c96b9c5d13a829d0ebd';
 const redirectUri = 'http://localhost:3000'; // TODO: dynamisch erstellen: also: window.location.host oder so
+//Varible, die erhaltenen Access Token speichern soll
 let accessToken;
 
 const Spotify = {
