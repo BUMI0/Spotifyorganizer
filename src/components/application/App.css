@@ -18,7 +18,7 @@ h1 {
 }
 
 h1 .highlight {
-  color: #6c41ec;
+  color: #5030af75;
 }
 
 h2 {
@@ -29,7 +29,7 @@ h2 {
 .App {
   height: 100%;
   padding: 0 17% 10% 17%;
-  background-image: url('./background.jpg');
+  background-image: url('./background-so.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
