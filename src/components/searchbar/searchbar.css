@@ -12,9 +12,11 @@
     border: 1px solid #fff;
     border-radius: 3px;
     margin-bottom: 2.22rem;
-    color: #010c3f;
+    color: #000000;
     text-align: center;
     font-size: 1rem;
+    background-color: #ffffff80;
+    border-radius: 15px;
   }
   
   .SearchBar input:focus {
@@ -23,10 +25,10 @@
   
   .SearchButton {
     cursor: pointer;
-    width: 8.11rem;
+    width: 287px;
     padding: .77rem 0;
-    border-radius: 54px;
-    background-color: #010c3f;
+    border-radius: 15px;
+    background-color: #a79dbf;
     text-align: center;
     font-size: .833rem;
     transition: background-color .25s;
@@ -36,5 +38,5 @@
   }
   
   .SearchButton:hover {
-    background-color: rgba(108, 65, 233, .7);
+    background-color: rgba(102, 88, 141, 0.7);
   }
