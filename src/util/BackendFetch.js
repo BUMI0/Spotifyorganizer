@@ -49,7 +49,9 @@ const Backend = {
         // TODO: return sessionKey or error
     },
 
-    async validateSession() {
+    async validateSession(key) {
+        // for testing purposes
+        sessionKey = key === undefined ? sessionKey : key;
         const body = JSON.stringify({
             sessionKey: sessionKey,
         });
@@ -60,7 +62,8 @@ const Backend = {
         // TODO: return sessionKey or error
     },
 
-    async getSpotifyKey() {
+    async getSpotifyKey(key) {
+        sessionKey = key === undefined ? sessionKey : key;
         const body = JSON.stringify({
             sessionKey: sessionKey,
         });

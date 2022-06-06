@@ -1,0 +1,2 @@
+If login.test.js fails because "username already exists" just restart the backend server and try again
+because its possible, that the test registrations already exists in the db by prior testing, but on startup the always get deleted
