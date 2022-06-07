@@ -23,6 +23,8 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
   }
+  //Songs von searchresults werden zu Ende der Playlist hinzugefügt, wenn id Property nicht mit einem
+  //bereits hinzugefügten track übereinstimmt
   addTrack(track){
     let tracks = this.state.playlistTracks;
     if(tracks.find(savedTrack => savedTrack.id === track.id)){
