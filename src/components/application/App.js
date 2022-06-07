@@ -68,6 +68,7 @@ class App extends React.Component {
           
           <SearchResults searchResults={this.state.searchResults}
                         onAdd={this.addTrack}/>
+          //State von PlaylistName, Tracks, ... an Playlist Komponente übergeben
           <Playlist playlistName={this.state.playlistName}
                 playlistTracks={this.state.playlistTracks}
                 onRemove={this.removeTrack}
