@@ -40,8 +40,9 @@ class App extends React.Component {
     tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
     this.setState({playlistTracks: tracks});
   }
-
+  //Nutzer kann den Namen der Playlist ändern 
   updatePlaylistName(name){
+    //State wird zu dem input Argument gesetzt
     this.setState({playlistName: name});
   }
 
