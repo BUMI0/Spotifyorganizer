@@ -23,6 +23,7 @@ class TrackList extends React.Component{
     }
 }
 
+//überprüfen, ob die daten valid sind
 TrackList.propTypes = {
     tracks: PropTypes.array.isRequired,
     onAdd: PropTypes.func,
