@@ -22,6 +22,7 @@ class Track extends React.Component{
     addTrack() {
         this.props.onAdd(this.props.track);
     }
+    //Entfernt Track, dessen id Property aus Playlist gefiltert wurde
     removeTrack(){
         this.props.onRemove(this.props.track);
     }
