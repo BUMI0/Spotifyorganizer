@@ -33,7 +33,7 @@ class App extends React.Component {
     tracks.push(track);
     this.setState({playlistTracks: tracks})
   }
-
+  //track mithilfe id property aus playlisttracks zu filtern und neues State bei Playlist setzen
   removeTrack(track){
     let tracks = this.state.playlistTracks;
     tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
