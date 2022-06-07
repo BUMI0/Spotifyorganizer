@@ -12,6 +12,7 @@ class Track extends React.Component{
     }
     //Button -> Song hinzufügen oder entfernen
     renderAction () {
+        //Button mit - wenn isRemoval = false
         if (this.props.isRemoval){
             return <button className='Track-action' onClick={this.removeTrack}>-</button>
         } else {
