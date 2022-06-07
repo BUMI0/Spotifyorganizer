@@ -14,7 +14,8 @@ class App extends React.Component {
     this.state={
       searchResults: [],
        playlistName: 'My Playlist',
-       playlistTracks: []
+      //Tracks die von den searchresults in die Playlist gefügt werden 
+      playlistTracks: []
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
