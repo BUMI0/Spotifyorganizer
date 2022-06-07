@@ -17,6 +17,7 @@ class App extends React.Component {
       //Tracks die von den searchresults in die Playlist gefügt werden 
       playlistTracks: []
     };
+    //binden, weil Methoden an Playlist Komponente gepassed wird
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
@@ -73,6 +74,7 @@ class App extends React.Component {
           //State von PlaylistName, Tracks, ... an Playlist Komponente übergeben
           <Playlist playlistName={this.state.playlistName}
                 playlistTracks={this.state.playlistTracks}
+                //removeTrack Methode an Playlist Komponente weitergeben
                 onRemove={this.removeTrack}
                 onNameChange={this.updatePlaylistName}
                 onSave = {this.savePlaylist}/>
