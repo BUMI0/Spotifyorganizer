@@ -71,7 +71,7 @@ class App extends React.Component {
     if(!this.token) {
       return (
       <div className="login-wrapper">
-      <h1>Please Log In</h1>
+      <h1>SpotifyOrganizer</h1>
       <form>
         <label>
           <p>Username</p>
@@ -82,7 +82,7 @@ class App extends React.Component {
           <input type="password" />
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">Anmelden</button>
         </div>
       </form>
     </div>

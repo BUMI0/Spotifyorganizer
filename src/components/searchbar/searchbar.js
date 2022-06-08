@@ -26,7 +26,7 @@ class SearchBar extends React.Component{
     render(){
         return (
             <div className="SearchBar">
-                //handleTermChange wird ausgelöst, wenn Nutzer Sucherbegriff eingibt
+               {/*handleTermChange wird ausgelöst, wenn Nutzer Sucherbegriff eingibt*/}
                 <input onChange = {this.handleTermChange} placeholder="Suchbegriff eingeben" />
                 <button className="SearchButton">SUCHE STARTEN</button>
             </div>
