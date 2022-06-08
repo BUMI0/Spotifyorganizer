@@ -19,7 +19,7 @@ class App extends React.Component {
       //Tracks die von den searchresults in die Playlist gefügt werden 
       playlistTracks: []
     };
-    this.token = false;
+    this.token = "oooo";
     //binden, weil Methoden an Playlist Komponente gepassed wird
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
