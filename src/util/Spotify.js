@@ -55,8 +55,8 @@ const Spotify = {
     })
 
     },
-
-    savePlaylist(name,trackUris){
+   //erstellte Playlist zu dem Spotidfy Account des NUtzers hinzufügen
+    savePlaylist(name,trackUris){ //kontrolliert, ob Werte als Name und Track Uris gespeichert sind
         if(!name || !trackUris.length){
             return;
         }
@@ -65,23 +65,25 @@ const Spotify = {
         const headers = {Authorization: `Bearer ${accessToken}`};
         let userId;
 
-        return fetch('https://api.spotify.com/v1/me', {headers: headers}
-        ).then(response => response.json()
+        return fetch('https://api.spotify.com/v1/me', {headers: headers} //request nach dem usernamen des NUtzers
+        ).then(response => response.json() //umwandlung der reaponse zu json
         ).then(jsonResponse => {
             userId = jsonResponse.id;
-            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`,
+            //POST request erstellt eine neue Playlist
+            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, 
             {
                 headers: headers,
-                metho: 'POST',
-                body: JSON.stringify({name: name})
+                method: 'POST',
+                body: JSON.stringify({name: name}) //Playlist mit Namen der die Methode als Parameter hat
             }).then(response => response.json()
             ).then(jsonResponse => {
-                const playlistId = jsonResponse.id;
+                const playlistId = jsonResponse.id; //playlist Id ist die Id der erstellten Playlist im Spotify Account
+                //POST requets der den track array zu der Playlist hinzufügt
                 return fetch(`https://api.spontify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks`,
                 {
                     headers: headers,
                     method: 'POST',
-                    body: JSON.stringify({uris: trackUris})
+                    body: JSON.stringify({uris: trackUris}) //der tracks array
                 })
             })
         })
