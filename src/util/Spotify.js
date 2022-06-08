@@ -1,3 +1,4 @@
+//clientId von Spotify gegeben durch registrieren einer WebApplikation
 const clientId = '6698407c6b244c96b9c5d13a829d0ebd';
 const redirectUri = 'http://localhost:3000'; // TODO: dynamisch erstellen: also: window.location.host oder so
 //Varible, die erhaltenen Access Token speichern soll
@@ -10,6 +11,7 @@ const Spotify = {
         }
 
         //gibt es einen access Token paar?
+        //access token und mithilfe window.location.href aus URL abgerufen
         const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
         const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
 
@@ -18,19 +20,21 @@ const Spotify = {
             const expiresIn = Number(expiresInMatch[1]);
 
             //Die existierenden Parameter entfernen um neue Access Token zu erhalten
-            window.setTimeout(() => accessToken = '', expiresIn * 1000);
-            window.history.pushState('Access Token', null, '/');
+            window.setTimeout(() => accessToken = '', expiresIn * 1000); //Ablaufzeit
+            window.history.pushState('Access Token', null, '/'); //
             return accessToken;
         } else {
+            //redirect zu login
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
             window.location = accessUrl;
         }
     },
-
-    async search(term){
+    
+    async search(term){ //akzeptiert den Such Term des Nutzers
         const accessToken = Spotify.getAccessToken();
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,
         {headers: {
+            //request nach access token
             Authorization: `Bearer ${accessToken}`
         }
     }).then(response => {
