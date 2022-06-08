@@ -1,0 +1,71 @@
+body,
+html,
+#root {
+  height: 100%;
+}
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+h1 {
+    padding: 1.2rem 0;
+    background-color: #78668c;
+    text-align: center;
+    font-family: 'arial black',sans-serif;
+    font-size: 2.88rem;
+    color: #fff;
+  }
+  
+  h1 .highlight {
+    color: #cac3d2;
+  }
+
+form {
+    border: 500px solid #78668c;
+  }
+
+  .container {
+	background-color: rgb(67 54 97 / 59%);
+	box-shadow: 0 4px 2px 2px #00000036;
+    padding: 16px;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+  input[type=text], input[type=password] {
+    width: 287px;
+    padding: 0.88rem 0;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    margin-bottom: 2.22rem;
+    color: #000000;
+    text-align: center;
+    font-size: 1rem;
+    background-color: #ffffff80;
+    border-radius: 15px;
+}
+button {
+    cursor: pointer;
+    width: 287px;
+    padding: 0.77rem 0;
+    border-radius: 15px;
+    background-color: #a79dbf;
+    text-align: center;
+    font-size: .833rem;
+    transition: rgba(102, 88, 141, 0.7);
+    border: 0px;
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
