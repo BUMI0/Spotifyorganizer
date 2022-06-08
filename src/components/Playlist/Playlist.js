@@ -19,6 +19,7 @@ class Playlist extends React.Component {
             <TrackList tracks={this.props.playlistTracks}
                         onRemove={this.props.onRemove}
                         isRemoval={true}/>
+            //value set wird ausgeführt bei button click
             <button className="Playlist-save" onClick={this.props.onSave}>IN SPOTIFY ÜBERTRAGEN</button>
           </div> 
         )
