@@ -2,14 +2,14 @@ import React from 'react';
 
 import './searchbar.css';
 
-class SearchBar extends React.Component{
-    constructor(props){
+class SearchBar extends React.Component {
+    constructor(props) {
         super(props);
-        
+
         this.state = {
             term: ''
         }
-        
+
         this.search = this.search.bind(this);
         this.handleTermChange = this.handleTermChange.bind(this);
     }
@@ -17,17 +17,17 @@ class SearchBar extends React.Component{
     search() {
         this.props.onSearch(this.state.term);
     }
-    
-    
+
+
     //Methode ersetzt den searchbar term mit dem event target wert
-    handleTermChange(event){
-        this.setState({term: event.target.value});
+    handleTermChange(event) {
+        this.setState({ term: event.target.value });
     }
-    render(){
+    render() {
         return (
             <div className="SearchBar">
-                //handleTermChange wird ausgelöst, wenn Nutzer Sucherbegriff eingibt
-                <input onChange = {this.handleTermChange} placeholder="Suchbegriff eingeben" />
+                {/*handleTermChange wird ausgelöst, wenn Nutzer Sucherbegriff eingibt*/}
+                <input onChange={this.handleTermChange} placeholder="Suchbegriff eingeben" />
                 <button className="SearchButton">SUCHE STARTEN</button>
             </div>
         )
