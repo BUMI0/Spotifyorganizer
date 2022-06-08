@@ -45,10 +45,12 @@ class App extends React.Component {
     //State wird zu dem input Argument gesetzt
     this.setState({playlistName: name});
   }
-
+  
   savePlaylist(){
+    //Array mit den uris der tracks aus der Playlist 
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
+      //State auf ein leeres Array und default Playlist namen setzen
       this.setState({
         playlistName: 'New Playlist',
         playlistTracks: []
