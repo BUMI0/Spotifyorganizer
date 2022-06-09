@@ -22,9 +22,13 @@ const key_salt = Buffer.from("a3a51f61059afcf7dbfc3729809e1c6cf106874a6603f5604b
 const app = express();
 
 // Initialize Middlewares
-app.use(cors());
 app.use(morgan(loggingLevel));
 app.use(express.json());
+app.use(cors());
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
 
 // Initialize MongoDB
 // Unsing MongoDB after extensive use of SQL in praxisphase really opened my eyes, how bad/not big project ready  mongodb compared to sql is XD
@@ -44,6 +48,7 @@ if (false) {
     // add test accounts to useres db:
     addUserToDbWithoutChecks("logintest", "logintest@example.com", "logintestpw", "logintestspotifytoken");
     addUserToDbWithoutChecks("loginEMAILtest", "loginEMAILtest@example.com", "loginEMAILtestpw", "loginEMAILtestspotifytoken");
+    addUserToDbWithoutChecks("chibbi", "chibbi@example.com", "b1g01ck", "BQAWhFkLj30ZZvrqWMg4Boa3V3WgHYqCELKYlZ9ILdANAB4BbnkjQupM_eCpBiTK_73wiaPGfaqKA4u-5TodszUngwFGzXZDO19BwdnqHjTQNTyPEKhQ_oTSZeIjDULZpezAfbOxXF3tydn1nL9mZ0GItEsL0t3C6tC79AeWLXq06Syntekrke7PmRDbbmczXSg")
 }
 // delete test Accounts on startup:
 dbConn.collection("users").deleteMany({ "username": "user'1=1test'name" });
@@ -134,8 +139,11 @@ app.post("/auth/login", (req, res) => {
     }
     if (username.includes("@")) {
         sessionParser.createSessionViaEMail(username, userpw, dbConn, (sessionId) => {
+            if (sessionId == undefined) {
+                res.status(401).send({ "err": "wrong input" });
+                return;
+            }
             // can also use res.statusCode = 200
-            console.log("sending:", { "result": sessionId, "err": false });
             res.status(200).send({ "result": sessionId, "err": false });
         })
             .catch((e) => {
@@ -171,15 +179,15 @@ app.post("/auth/session", (req, res) => {
         }
     }
 });
-app.post("/data/spotifytoken", (req, res) => {
+app.post("/data/spotifytoken/get", (req, res) => {
     const sessionKey = req.body.sessionKey;
     if (sessionKey == undefined) {
         res.status(401).send({ "err": "invalid input" });
         return;
     }
     try {
-        const token = sessionParser.getSpotifyToken(sessionKey);
         if (sessionParser.checkSession(sessionKey)) {
+            const token = sessionParser.getSpotifyToken(sessionKey);
             res.status(200).send({ "result": token, "err": false });
             return;
         }
@@ -189,6 +197,46 @@ app.post("/data/spotifytoken", (req, res) => {
             return;
         } else {
             res.status(500).send({ "err": "could not attempt to find spotify token" });
+            console.error("got some error, spotifytoken:", e);
+        }
+    }
+});
+
+app.post("/data/spotifytoken/set", (req, res) => {
+    const sessionKey = req.body.sessionKey;
+    const newToken = req.body.spToken;
+    const username = req.body.name;
+    const userpw = req.body.pw;
+    if (sessionKey == undefined) {
+        res.status(401).send({ "err": "invalid input" });
+        return;
+    }
+    try {
+        if (sessionParser.checkSession(sessionKey)) {
+            // every username is unique also useremail one of those is enough
+            const cipher = crypto.createCipheriv(algo, crypto.scryptSync(userpw, key_salt, 32), int_vector);
+            const encrypted_spotifytoken = cipher.update(newToken).toString("hex");
+            dbConn.collection("users").updateOne({
+                username: username
+            }, {
+                $set: {
+                    spotifytoken: encrypted_spotifytoken
+                }
+            }, (err, dbRes) => {
+                if (err) {
+                    res.status(500).send({ "err": "could not set spotify token" });
+                    throw err;
+                }
+                res.status(200).send({ "result": true, "err": false });
+                return;
+            });
+        }
+    } catch (e) {
+        if (e instanceof WrongSessionKey || e instanceof WrongCredentials) {
+            res.status(401).send({ "err": "wrong input" });
+            return;
+        } else {
+            res.status(500).send({ "err": "could not set spotify token" });
             console.error("got some error, spotifytoken:", e);
         }
     }
@@ -218,8 +266,11 @@ function addUserToDbWithoutChecks(username, useremail, userpw, spotifytoken) {
 
 function createSession(username, userpw, res) {
     sessionParser.createSessionViaName(username, userpw, dbConn, (sessionId) => {
+        if (sessionId == undefined) {
+            res.status(401).send({ "err": "wrong input" });
+            return;
+        }
         // can also use res.statusCode = 200
-        console.log("sending:", { "result": sessionId, "err": false });
         res.status(200).send({ "result": sessionId, "err": false });
     })
         .catch((e) => {

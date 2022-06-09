@@ -14,7 +14,7 @@ class SearchBar extends React.Component {
         this.handleTermChange = this.handleTermChange.bind(this);
     }
     //Methode akzeptiert den state von dem search Attribut 
-    search() {
+    search(event) {
         this.props.onSearch(this.state.term);
     }
 
@@ -28,7 +28,7 @@ class SearchBar extends React.Component {
             <div className="SearchBar">
                 {/*handleTermChange wird ausgelöst, wenn Nutzer Sucherbegriff eingibt*/}
                 <input onChange={this.handleTermChange} placeholder="Suchbegriff eingeben" />
-                <button className="SearchButton">SUCHE STARTEN</button>
+                <button onClick={this.search} className="SearchButton">SUCHE STARTEN</button>
             </div>
         )
     }

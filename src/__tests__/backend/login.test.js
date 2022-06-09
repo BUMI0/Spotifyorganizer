@@ -71,6 +71,7 @@ test("backend invalid get spotify Key 1", async () => {
     const result = await BackendFetch.getSpotifyKey("something");
     expect(result["err"]).toBe("wrong input");
 });
+// TODO: set spotify Key test
 
 // Testing register User //
 test("backend invalid register 1", async () => {

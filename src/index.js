@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    {/* DEBUG */}
+    <script src="http://localhost:8097"></script>
     <App />
   </React.StrictMode>
 );

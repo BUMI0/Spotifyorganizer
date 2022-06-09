@@ -10,6 +10,7 @@ const key_salt = Buffer.from("a3a51f61059afcf7dbfc3729809e1c6cf106874a6603f5604b
 const sessions = {
     "PLACEHOLDER_SESSION_KEY": {
         "spotifyKey": "PLACEHOLDER_SPOTIFY_KEY",
+        "username": "PLACEHOLDER_USERNAME",
         "creationTime": 111111,
         "isAdmin": false,
     }
@@ -30,7 +31,6 @@ class sessionParser {
             throw new WrongCredentials("wrong credentials");
         }
         if (sessionsByName.hasOwnProperty(username)) {
-            console.log("found session:", sessionsByName[username], "for", username);
             callback(sessionsByName[username]);
             return;
         }
@@ -55,12 +55,14 @@ class sessionParser {
                 const sessionId = sessionParser.createNewSessionId();
                 sessions[sessionId] = {
                     "spotifyKey": decrypted_spotifytoken,
+                    "username": username,
                     "creationTime": new Date().getTime(),
                     "isAdmin": false,
                 }
                 sessionsByName[username] = sessionId;
                 nameByEmail[dbRes.useremail] = username;
                 callback(sessionId);
+                console.log(username, "has logged in");
                 return;
             }
         });
@@ -71,7 +73,6 @@ class sessionParser {
         }
         if (nameByEmail.hasOwnProperty(email)) {
             if (sessionsByName.hasOwnProperty(nameByEmail[email])) {
-                console.log("found session:", sessionsByName[nameByEmail[email]], "for", nameByEmail[email]);
                 callback(sessionsByName[nameByEmail[email]]);
                 return;
             }
@@ -94,12 +95,14 @@ class sessionParser {
                 const sessionId = sessionParser.createNewSessionId();
                 sessions[sessionId] = {
                     "spotifyKey": decrypted_spotifytoken,
+                    "username": dbRes.username,
                     "creationTime": new Date().getTime(),
                     "isAdmin": false,
                 }
                 sessionsByName[dbRes.username] = sessionId;
                 nameByEmail[email] = dbRes.username;
                 callback(sessionId);
+                console.log(dbRes.username, "has logged in");
                 return;
             }
         });
@@ -118,7 +121,21 @@ class sessionParser {
                 delete sessions[sessionKey];
                 console.log("after:", sessions);
             }
+            console.log(sessionKey, "checked his Session", sessionTimedOut ? "unsuccessfully" : "successfully");
             return !sessionTimedOut;
+        }
+        throw new WrongSessionKey("wrong session key");
+    }
+
+    // Most likely never used, but whilest in development ill leave it in
+    // delete when stopping development
+    getUsername(sessionKey) {
+        if (textCheck.checkInput(sessionKey)) {
+            throw new WrongCredentials("wrong credentials");
+        }
+        if (sessions.hasOwnProperty(sessionKey)) {
+            console.log("Someone needed his username to change his spoitfytoken");
+            return sessions[sessionKey]["username"];
         }
         throw new WrongSessionKey("wrong session key");
     }
@@ -128,6 +145,7 @@ class sessionParser {
             throw new WrongCredentials("wrong credentials");
         }
         if (sessions.hasOwnProperty(sessionKey)) {
+            console.log("Someone requested his spotifytoken, which will not be printed here");
             return sessions[sessionKey]["spotifyKey"];
         }
         throw new WrongSessionKey("wrong session key");

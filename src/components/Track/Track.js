@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 import './Track.css';
 
-class Track extends React.Component{
-    constructor(props){
+class Track extends React.Component {
+    constructor(props) {
         super(props);
 
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
     }
     //Button -> Song hinzufügen oder entfernen
-    renderAction () {
+    renderAction() {
         //Button mit - wenn isRemoval = false
-        if (this.props.isRemoval){
+        if (this.props.isRemoval) {
             return <button className='Track-action' onClick={this.removeTrack}>-</button> //auslösen der removeTrack Methode
         } else {
             return <button className='Track-action' onClick={this.addTrack}>+</button> //auslösen der addTrack Methode
@@ -23,11 +23,11 @@ class Track extends React.Component{
         this.props.onAdd(this.props.track);
     }
     //Entfernt Track, dessen id Property aus Playlist gefiltert wurde
-    removeTrack(){
+    removeTrack() {
         this.props.onRemove(this.props.track);
     }
 
-    render () {
+    render() {
         return (
             <div className="Track">
                 <div className="Track-action">
@@ -41,9 +41,10 @@ class Track extends React.Component{
 }
 
 Track.propTypes = {
-    searchResults: PropTypes.array.isRequired,
+    track: PropTypes.object.isRequired,
+    key: PropTypes.string,
     onAdd: PropTypes.func,
     onRemove: PropTypes.func,
-    track: PropTypes.object,
+    isRemoval: PropTypes.bool
 }
 export default Track;
