@@ -117,7 +117,7 @@ class App extends React.Component {
     if (!this.state.isLoggedIn) {
       return (
         <div className="login-wrapper">
-          <h1>Please Log In</h1>
+          <h1>SpotifyOrganizer</h1>
           <form onSubmit={this.handleLoginPage}>
             <label>
               <p>Username</p>
@@ -128,7 +128,7 @@ class App extends React.Component {
               <input className='loginPassword' type="password" placeholder='Password' value={this.state.loginPassword} onChange={this.handleChangeForm} />
             </label>
             <div>
-              <button type="submit" onSubmit={this.handleLoginPage}>Submit</button>
+              <button type="submit" onSubmit={this.handleLoginPage}>Anmelden</button>
               <p>{this.state.loginError}</p>
             </div>
           </form>

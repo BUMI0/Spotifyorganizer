@@ -63,13 +63,13 @@ const Spotify = {
 
     },
 
-    savePlaylist(name, trackUris, accessToken) {
+    savePlaylist(name, trackUris, dbAccessToken) {
         if (!name || !trackUris.length) {
             return;
         }
         // TODO: handle empty playlists properly, seems there are bugs to kill
         // TODO: feedback to user if upload was successful
-        accessToken = accessToken === undefined ? Spotify.getAccessToken() : accessToken;
+        const accessToken = Spotify.getAccessToken(dbAccessToken);
         const headers = { Authorization: `Bearer ${accessToken}` };
 
         return fetch('https://api.spotify.com/v1/me', { headers: headers }
