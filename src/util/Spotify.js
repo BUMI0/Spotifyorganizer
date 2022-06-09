@@ -29,6 +29,7 @@ const Spotify = {
             window.setTimeout(() => accessToken = '', expiresIn * 1000); //Ablaufzeit
             window.history.pushState('Access Token', null, '/'); //
             // TODO: safe new accesstoken inside of DB backend
+            console.log("ACCESS TOKEN:", accessToken);
             return accessToken;
         } else {
             //redirect zu login

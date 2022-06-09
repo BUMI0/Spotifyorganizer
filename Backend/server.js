@@ -42,7 +42,7 @@ mClient = await mClient.connect();
 const dbConn = mClient.db(mongoDBName);
 console.log("connected to: " + "mongodb://" + mongoDBUrl + ":" + mongoDBPort + "/" + mongoDBName);
 
-if (false) {
+if (true) {
     // reset the users database:
     dbConn.collection("users").deleteMany({});
     // add test accounts to useres db:
